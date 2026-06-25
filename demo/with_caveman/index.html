@@ -3,11 +3,164 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anti Bad Habit Tracker</title>
+    <title>Habit Tracker</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <div id="app"></div>
+    <div class="app">
+      <header class="app-bar">
+        <span class="material-icons app-bar__icon">self_improvement</span>
+        <span class="app-bar__title">Habit Tracker</span>
+        <span class="app-bar__date" id="currentDate"></span>
+      </header>
+
+      <main class="main">
+        <section class="card rules-card" aria-label="Accountability rules">
+          <h2 class="section-title">Rules</h2>
+          <p class="rules-text">
+            Missed day resets streak. Future date check-in blocked. Reach 60
+            clean days and habit gets archived as broken.
+          </p>
+        </section>
+
+        <section class="card add-card">
+          <h2 class="section-title">Add Habit</h2>
+          <div class="input-row">
+            <div class="text-field">
+              <input
+                type="text"
+                id="habitInput"
+                class="text-field__input"
+                placeholder=" "
+                maxlength="60"
+              />
+              <label class="text-field__label" for="habitInput"
+                >New habit name</label
+              >
+              <div class="text-field__line"></div>
+            </div>
+            <button class="fab" id="addBtn" title="Add habit">
+              <span class="material-icons">add</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="card habits-card">
+          <div class="habits-header">
+            <h2 class="section-title">Active Habits</h2>
+            <span class="chip" id="progressChip">0 / 0</span>
+          </div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <ul class="habit-list" id="habitList"></ul>
+          <p class="empty-state" id="emptyState">
+            No habits yet. Add one above!
+          </p>
+        </section>
+
+        <section class="card habits-card" id="archivedSection" hidden>
+          <div class="habits-header">
+            <h2 class="section-title">Archived (Broken at 60 days)</h2>
+          </div>
+          <ul class="habit-list" id="archivedList"></ul>
+        </section>
+      </main>
+    </div>
+
+    <div class="snackbar" id="snackbar"></div>
+
+    <!-- Habit Detail Modal -->
+    <dialog
+      class="modal-backdrop"
+      id="modalBackdrop"
+      aria-labelledby="modalTitle"
+      aria-describedby="modalDesc"
+      hidden
+    >
+      <div class="modal" id="modal">
+        <div class="modal__header">
+          <h2 class="modal__title" id="modalTitle">Habit details</h2>
+          <button
+            class="icon-btn modal__close"
+            id="modalClose"
+            aria-label="Close details"
+          >
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="modal__body" id="modalDesc">
+          <div class="modal__stat-row">
+            <div class="modal__stat">
+              <span class="modal__stat-value" id="modalStreak"></span>
+              <span class="modal__stat-label">Current streak</span>
+            </div>
+            <div class="modal__stat">
+              <span class="modal__stat-value" id="modalNext"></span>
+              <span class="modal__stat-label">Next milestone</span>
+            </div>
+          </div>
+
+          <div class="modal__section-title">Progress to 60</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" id="modalProgressBar"></div>
+          </div>
+          <p class="modal__progress-text" id="modalProgressText">
+            0/60 clean days
+          </p>
+
+          <div class="modal__section-title">Badges</div>
+          <div class="modal__badges" id="modalBadges"></div>
+
+          <div class="modal__section-title">Daily check-in</div>
+          <div class="modal__checkin-row">
+            <label for="modalDateInput" class="modal__date-label">Date</label>
+            <input id="modalDateInput" type="date" class="modal__date-input" />
+            <button
+              class="fab modal__checkin-btn"
+              id="modalMarkClean"
+              title="Mark clean"
+            >
+              <span class="material-icons">done</span>
+            </button>
+            <button
+              class="icon-btn modal__checkin-btn"
+              id="modalMarkMissed"
+              aria-label="Mark missed"
+            >
+              <span class="material-icons">close</span>
+            </button>
+          </div>
+
+          <div class="modal__section-title">Last 28 days</div>
+          <div
+            class="modal__calendar"
+            id="modalCalendar"
+            aria-label="Completion history for last 28 days"
+          ></div>
+
+          <div class="modal__section-title">Journal (per selected day)</div>
+          <label class="modal__date-label" for="modalJournal"
+            >Journal notes</label
+          >
+          <textarea
+            id="modalJournal"
+            class="modal__journal"
+            rows="4"
+            placeholder="What happened today?"
+          ></textarea>
+        </div>
+      </div>
+    </dialog>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

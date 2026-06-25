@@ -54,6 +54,12 @@ layout: center
 layout: center
 ---
 
+<img src="/assets/4_1.png" alt="Habit Tracker App" class="max-h-100 rounded-xl" />
+
+---
+layout: center
+---
+
 <img src="/assets/4.png" alt="Caveman" class="max-h-100 rounded-xl" />
 
 ---
@@ -90,7 +96,7 @@ layout: center
 layout: center
 ---
 
-<video src="/assets/7.mp4" controls class="max-h-100 rounded-xl" />
+<img src="/assets/7.png" alt="Bug" class="max-h-100 rounded-xl" />
 
 ---
 layout: center
